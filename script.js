@@ -1,10 +1,22 @@
-let title;
-let screens;
-let screenPrice;
-let rollback;
-let fullPrice;
-let adaptive;
+let title = "Проект";
+let screens = "Простые, Сложные, Интерактивные";
+let screenPrice = 12;
+let rollback = 50;
+let fullPrice = 65000;
+let adaptive = true;
 
-alert("Сообщение в модальном окне");
+console.log(typeof title + "," + typeof fullPrice + "," + typeof adaptive);
+console.log("Длина строки " + screens);
+console.log(
+  "Стоимость верстки экранов " +
+    screenPrice +
+    " рублей\nСтоимость разработки сайта " +
+    fullPrice +
+    " рублей"
+);
 
-console.log("Сообщение в консоли");
+console.log(screens.toLowerCase().split(", "));
+
+console.log(
+  "Процент отката посреднику за работу " + fullPrice * (rollback / 100)
+);
