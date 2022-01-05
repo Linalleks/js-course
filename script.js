@@ -1,30 +1,74 @@
 "use strict";
 
-let title = prompt("Введите название вашего проекта:");
-let screens = prompt(
-  "Какие типы экранов нужно будет разработать? (введите через запятую)",
-  "Простые, Сложные, Интерактивные"
-);
-let screenPrice = +prompt(
-  "На какую стоимость разработки вашего проекта Вы расчитываете?"
-);
-let adaptive = confirm("Нужно ли будет разработать адаптив к вашему проекту?");
-let service1 = prompt(
-  "Введите дополнительный тип услуг №1, который Вам нужен:"
-);
-let servicePrice1 = +prompt("Сколько данная услуга будет стоить?");
-let service2 = prompt(
-  "Введите дополнительный тип услуг №2, который Вам нужен:"
-);
-let servicePrice2 = +prompt("Сколько данная услуга будет стоить?");
-
+let title;
+let screens;
+let screenPrice;
+let adaptive;
+let fullPrice;
+let allServicePrices;
+let servicePercentPrice;
+let service1;
+let service2;
 let rollback = 20;
 
-let fullPrice = screenPrice + servicePrice1 + servicePrice2;
-let servicePercentPrice = Math.ceil(fullPrice - fullPrice * (rollback / 100));
+const isNumber = function (num) {
+  return !isNaN(parseFloat(num)) && isFinite(num) && num !== null;
+};
+
+const asking = function () {
+  title = prompt("Введите название вашего проекта:");
+  screens = prompt(
+    "Какие типы экранов нужно будет разработать? (введите через запятую)",
+    "Простые, Сложные, Интерактивные"
+  );
+
+  do {
+    screenPrice = prompt("На какую стоимость данной работы Вы расчитываете?");
+  } while (!isNumber(screenPrice));
+
+  adaptive = confirm("Нужно ли будет разработать адаптив к вашему проекту?");
+
+  screenPrice.trim();
+};
+
+function getFullPrice(screenPrice = 0, addPrice = 0) {
+  return screenPrice + addPrice;
+}
 
 const showTypeOf = function (variable) {
   console.log(variable, typeof variable);
+};
+
+const getAllServicePrices = function () {
+  let sum = 0;
+  let price;
+
+  for (let i = 0; i < 2; i++) {
+    if (i === 0) {
+      service1 = prompt("Какой дополнительный тип услуг нужен?");
+    } else {
+      service2 = prompt("Какой дополнительный тип услуг нужен?");
+    }
+
+    do {
+      price = prompt("Сколько это будет стоить?");
+    } while (!isNumber(price));
+
+    price.trim();
+    sum += +price;
+  }
+
+  return sum;
+};
+
+const getTitle = function (title) {
+  return (
+    title.trim().charAt(0).toUpperCase() + title.trim().slice(1).toLowerCase()
+  );
+};
+
+const getServicePercentPrices = function (price = 0, rollback = 0) {
+  return Math.ceil(price - price * (rollback / 100));
 };
 
 const getRollbackMessage = function (price) {
@@ -40,11 +84,19 @@ const getRollbackMessage = function (price) {
   }
 };
 
+asking();
+title = getTitle(title);
+allServicePrices = getAllServicePrices();
+fullPrice = getFullPrice(+screenPrice, allServicePrices);
+servicePercentPrice = getServicePercentPrices(fullPrice, rollback);
+
 showTypeOf(rollback);
 showTypeOf(adaptive);
 showTypeOf(screens);
 
-alert(getRollbackMessage(fullPrice));
+alert(
+  "Проект " + title + " принят в работу.<br>" + getRollbackMessage(fullPrice)
+);
 
 console.log(screens.toLowerCase().split(", "));
 
