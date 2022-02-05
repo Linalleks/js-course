@@ -4,7 +4,6 @@ const title = document.getElementsByTagName("h1")[0];
 const btnStart = document.querySelector("#start");
 const btnReset = document.querySelector("#reset");
 const btnPlus = document.querySelector(".screen-btn");
-// const otherItems = document.querySelectorAll(".other-items");
 const itemsPercent = document.querySelectorAll(".other-items.percent");
 const itemsNumber = document.querySelectorAll(".other-items.number");
 const inputRange = document.querySelector(".rollback input[type=range]");
