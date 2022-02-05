@@ -21,23 +21,18 @@ console.log(inputRangeType);
 console.log(inputRangeValue);
 console.log(inputsTotal);
 
-// const appData = {
-//   title: "",
-//   screens: [],
-//   screenPrice: 0,
-//   adaptive: true,
-//   fullPrice: 0,
-//   allServicePrices: 0,
-//   servicePercentPrice: 0,
-//   services: {},
-//   rollback: 20,
-//   isNumber: function (num) {
-//     return !isNaN(parseFloat(num)) && isFinite(num) && num !== null;
-//   },
-//   asking: function () {
-//     do {
-//       appData.title = prompt("Введите название вашего проекта:");
-//     } while (appData.isNumber(appData.title));
+    // appData.logger();
+    console.log(appData);
+    appData.showResult();
+  },
+  showResult: function () {
+    total.value = appData.screenPrice;
+    totalCountOther.value =
+      appData.servicePricesPercent + appData.servicePricesNumber;
+    fulltotalCount.value = appData.fullPrice;
+  },
+  addScreens: function () {
+    screens = document.querySelectorAll(".screen");
 
 //     for (let i = 0; i < 2; i++) {
 //       let name, price;
